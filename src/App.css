@@ -1,0 +1,37 @@
+body {
+  background-color: #1e1e1e;
+}
+
+.input-field {
+  padding: 10px;
+  width: 300px;
+}
+
+.input-field:focus {
+  outline: none;
+  border: none;
+}
+
+.clear-field {
+  height: 40px;
+  width: 40px;
+  margin-left: 5px;
+}
+
+.clear-field:focus {
+  cursor: pointer;
+}
+
+.title {
+  color: white;
+  font-weight: 200;
+}
+.input-container {
+  display: flex;
+}
+.header {
+  display: flex;
+
+  justify-content: space-around;
+  align-items: center;
+}
