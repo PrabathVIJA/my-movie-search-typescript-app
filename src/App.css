@@ -91,3 +91,7 @@ body {
   width: 100%;
   justify-content: space-around;
 }
+
+.movie-details img {
+  height: auto;
+}
