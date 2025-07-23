@@ -1,5 +1,7 @@
 body {
   background-color: #1e1e1e;
+  margin: 0;
+  padding: 0;
 }
 
 .input-field {
@@ -34,4 +36,58 @@ body {
 
   justify-content: space-around;
   align-items: center;
+}
+
+.loader {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+.movie-title {
+  color: white;
+}
+.movie-container {
+  display: flex;
+  min-height: 60vh;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.movie-card {
+  list-style: none;
+  border: none;
+  color: white;
+  width: 200px;
+}
+.movie-card img {
+  width: 100%;
+  height: auto;
+}
+.Detail-Button {
+  width: 100%;
+}
+
+.individual-movie-container {
+  min-height: 100vh;
+}
+.footer-movie {
+  width: 100vw;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.movie-details {
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+}
+.title-year {
+  color: white;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
 }
