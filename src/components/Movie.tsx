@@ -20,8 +20,18 @@ export default function Movie({ feature, title, onClick }: movieprop) {
         </div>
         <div className="movie-details">
           {feature.map((featureMovie) => (
-            <div>
-              <img src={featureMovie.Poster} />
+            <div key={featureMovie.imdbID}>
+              <img
+                src={
+                  featureMovie.Poster === "N/A"
+                    ? "/FallBackImg.jpg"
+                    : featureMovie.Poster
+                }
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src =
+                    "/FallBackImg.jpg";
+                }}
+              />
               <div className="title-year">
                 <p>{featureMovie.Title}</p>
                 <p>{featureMovie.Year}</p>

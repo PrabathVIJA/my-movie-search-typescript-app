@@ -18,7 +18,17 @@ export default function SingleItem({
   return (
     <>
       <li className="movie-card">
-        <img src={movieDetail.Poster} />
+        <img
+          src={
+            movieDetail.Poster === "N/A"
+              ? "/FallBackImg.jpg"
+              : movieDetail.Poster
+          }
+          alt={movieDetail.Title}
+          onError={(e) => {
+            (e.currentTarget as HTMLImageElement).src = "/FallBackImg.jpg";
+          }}
+        />
         <button
           className="Detail-Button"
           onClick={() => {

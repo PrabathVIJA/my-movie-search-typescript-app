@@ -3,6 +3,8 @@ import { GrClearOption } from "react-icons/gr";
 import Input from "./components/Input.tsx";
 import Button from "./components/Button.tsx";
 import Title from "./components/Title.tsx";
+import { ToastContainer, toast } from "react-toastify";
+
 import { ClipLoader } from "react-spinners";
 import "./App.css";
 import SingleItem from "./components/SingleItem.tsx";
@@ -37,23 +39,47 @@ function App() {
   }
   useEffect(() => {
     if (input.trim().length <= 1) {
-      console.log(input.length);
-
       setMovies([]);
       return;
     }
-    async function fetchData() {
-      setLoading(true);
-      const response = await fetch(
-        `https://www.omdbapi.com/?apikey=${key}&s=${input}`
-      );
-      console.log(response);
+    const timer = setTimeout(() => {
+      async function fetchData() {
+        setLoading(true);
+        try {
+          const response = await fetch(
+            `https://www.omdbapi.com/?apikey=${key}&s=${input}`
+          );
 
-      const data = await response.json();
-      setMovies(data.Search);
-      setLoading(false);
-    }
-    fetchData();
+          if (!response.ok) {
+            if (response.status === 404) {
+              throw new Error("The requested resource was not found.");
+            } else if (response.status === 401) {
+              throw new Error("Invalid API key.");
+            } else {
+              throw new Error("Something went wrong. Please try again.");
+            }
+          }
+
+          const data = await response.json();
+
+          if (!data.Search || data.Search.length === 0) {
+            throw new Error(`${data.Error}`);
+          }
+
+          setMovies(data.Search);
+        } catch (e) {
+          if (e instanceof Error) {
+            toast.error(e.message);
+          } else {
+            toast.error("An unexpected error occurred");
+          }
+        } finally {
+          setLoading(false);
+        }
+      }
+      fetchData();
+    }, 500);
+    return () => clearTimeout(timer);
   }, [input]);
 
   return (
@@ -98,6 +124,7 @@ function App() {
           <ClipLoader color="white" size={40} />
         </div>
       )}
+      <ToastContainer position="top-right" autoClose={1000} />
     </>
   );
 }
