@@ -26,7 +26,14 @@ function App() {
 
   // for handling input data
   function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
-    setInput(e.target.value);
+    const value = e.target.value;
+    let cleaned = value.replace(/[^a-zA-Z0-9 ]/g, "");
+
+    if (cleaned.startsWith(" ")) {
+      cleaned = cleaned.trimStart();
+    }
+
+    setInput(cleaned);
   }
   // for clearing input field
   function clearInputHandler() {
