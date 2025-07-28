@@ -1,4 +1,4 @@
-import { useEffect, useState, lazy, Suspense } from "react";
+import { useEffect, useState, lazy, Suspense, useCallback } from "react";
 import { GrClearOption } from "react-icons/gr";
 import Input from "./components/Input.tsx";
 import Button from "./components/Button.tsx";
@@ -26,7 +26,7 @@ function App() {
   const [singleMovie, setMovie] = useState<movieDetail[]>([]);
 
   // for handling input data
-  function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
+  const inputHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     let cleaned = value.replace(/[^a-zA-Z0-9 ]/g, "");
 
@@ -35,11 +35,11 @@ function App() {
     }
 
     setInput(cleaned);
-  }
+  }, []);
   // for clearing input field
-  function clearInputHandler() {
+  const clearInputHandler = useCallback(() => {
     setInput("");
-  }
+  }, []);
 
   function singleMovieHandler(movie: movieDetail) {
     setMovieDetails(true);

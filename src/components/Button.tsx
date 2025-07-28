@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import React from "react";
 
 type ButtonProps = {
   children: ReactNode; // 👈 can be any renderable React content
@@ -11,3 +12,4 @@ export default function Button({ children, onClick }: ButtonProps) {
     </button>
   );
 }
+React.memo(Button);

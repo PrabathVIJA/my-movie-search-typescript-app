@@ -1,3 +1,5 @@
+import React from "react";
+
 type inputProps = {
   placeholder: string;
   type: string;
@@ -22,3 +24,5 @@ export default function Input({
     </>
   );
 }
+
+React.memo(Input);
