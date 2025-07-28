@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { GrClearOption } from "react-icons/gr";
 import Input from "./components/Input.tsx";
 import Button from "./components/Button.tsx";
@@ -9,7 +9,8 @@ import { ClipLoader } from "react-spinners";
 import "./App.css";
 import SingleItem from "./components/SingleItem.tsx";
 import type { movieDetail } from "./components/SingleItem.tsx";
-import Movie from "./components/Movie.tsx";
+const Movie = lazy(() => import("./components/Movie.tsx"));
+
 const key: string = "1445ada9";
 export interface movies {
   Title: string;
@@ -92,11 +93,13 @@ function App() {
   return (
     <>
       {showMovieDetails ? (
-        <Movie
-          feature={singleMovie}
-          title="Movie Detail Page"
-          onClick={setMovieDetails}
-        />
+        <Suspense fallback={<ClipLoader color="white" size={40} />}>
+          <Movie
+            feature={singleMovie}
+            title="Movie Detail Page"
+            onClick={setMovieDetails}
+          />
+        </Suspense>
       ) : (
         <>
           <div className="header">
