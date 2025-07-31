@@ -36,7 +36,7 @@ function App() {
 
     setInput(cleaned);
   }, []);
-  // for clearing input field
+  // for clearing input fild
   const clearInputHandler = useCallback(() => {
     setInput("");
   }, []);
